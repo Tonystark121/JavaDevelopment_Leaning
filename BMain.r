@@ -113,3 +113,6 @@ git config --global --list -> This give admin name/email.
 
 If you want to set your details: git config --global user.name "Rajeev Kumar" similary set email.
 
+git diff -> to check the diff in updated code.and do the same.
+
+git rm --cached file_name -> to delete file from git if added /
