@@ -25,3 +25,117 @@ Example Code:
 5. ResultSet rs = st.executeQuery("select * from student")
 6. rs.next()
 7. rs.getInt(1) + " " + rs.getInt(2)
+
+
+## **🔹 JDBC Mastery Roadmap**
+
+### **1️⃣ JDBC Basics (You Already Know)**
+✔ **Import JDBC package:** `import java.sql.*;`  
+✔ **Load & Register Driver:** `Class.forName("org.postgresql.Driver");`  
+✔ **Establish Connection:** `DriverManager.getConnection(url, user, pass);`  
+✔ **Create & Execute Statement:** `Statement stmt = con.createStatement();`  
+✔ **Process Results:** `ResultSet rs = stmt.executeQuery(query);`  
+✔ **Close Connection:** `con.close();`  
+
+---
+
+### **2️⃣ Advanced JDBC Concepts**
+✅ **Types of JDBC Drivers:**  
+- **JDBC-ODBC Bridge Driver (Type 1)** → Legacy, avoid using  
+- **Native API Driver (Type 2)** → Uses OS-specific libraries  
+- **Network Protocol Driver (Type 3)** → Less common  
+- **Thin Driver (Type 4)** → **Best for modern Java apps**  
+
+✅ **Handling SQL Exceptions Properly**  
+- Instead of `catch (Exception e)`, use:
+  ```java
+  catch (SQLException e) {
+      System.err.println("SQL Error: " + e.getMessage());
+      e.printStackTrace();
+  }
+  ```
+
+✅ **Using Prepared Statements** (Prevents SQL Injection)  
+- **❌ Bad Practice (Vulnerable to SQL Injection)**  
+  ```java
+  Statement stmt = con.createStatement();
+  ResultSet rs = stmt.executeQuery("SELECT * FROM users WHERE username = '" + userInput + "'");
+  ```
+- **✅ Best Practice (Using PreparedStatement)**  
+  ```java
+  PreparedStatement pstmt = con.prepareStatement("SELECT * FROM users WHERE username = ?");
+  pstmt.setString(1, userInput);
+  ResultSet rs = pstmt.executeQuery();
+  ```
+
+✅ **Using Transactions in JDBC**  
+- **By default, each SQL statement is auto-committed.** To **group multiple queries in one transaction**, use:
+  ```java
+  con.setAutoCommit(false);
+  try {
+      stmt.executeUpdate("INSERT INTO orders ...");
+      stmt.executeUpdate("UPDATE inventory ...");
+      con.commit();  // ✅ Commit transaction
+  } catch (SQLException e) {
+      con.rollback();  // ❌ Rollback if any failure
+      e.printStackTrace();
+  } finally {
+      con.setAutoCommit(true);
+  }
+  ```
+
+✅ **Batch Processing for Performance Optimization**  
+Instead of executing multiple queries one by one:
+  ```java
+  stmt.addBatch("INSERT INTO employees VALUES (1, 'Alice')");
+  stmt.addBatch("INSERT INTO employees VALUES (2, 'Bob')");
+  stmt.executeBatch(); // ✅ Executes all at once, improving performance
+  ```
+
+✅ **Using Connection Pooling (HikariCP, C3P0, Apache DBCP)**  
+- Instead of creating a new connection for each request (**slow** 🐢), **use a connection pool**:
+  ```java
+  HikariConfig config = new HikariConfig();
+  config.setJdbcUrl("jdbc:postgresql://localhost:5432/testdb");
+  config.setUsername("postgres");
+  config.setPassword("password");
+  HikariDataSource ds = new HikariDataSource(config);
+
+  Connection con = ds.getConnection(); // ✅ Uses pooled connection
+  ```
+
+✅ **Reading Database Metadata**  
+- Get **table names, column types, indexes** dynamically:
+  ```java
+  DatabaseMetaData metaData = con.getMetaData();
+  ResultSet tables = metaData.getTables(null, null, "%", new String[]{"TABLE"});
+  while (tables.next()) {
+      System.out.println("Table: " + tables.getString("TABLE_NAME"));
+  }
+  ```
+
+---
+
+## **🔹 Next Steps: Hands-on Exercises**
+1️⃣ **Write a JDBC program** that:
+   - Connects to **PostgreSQL**  
+   - Uses a **PreparedStatement**  
+   - Uses **Transactions (commit & rollback)**  
+
+2️⃣ **Set up HikariCP** in your Gradle project.
+
+3️⃣ **Build a mini Java application** that interacts with a database (CRUD operations).  
+
+🚀 **I’ll guide you through each step!** Let me know which one you want to start first.
+
+
+Important Methods:
+
+st.executeQuery() -> DQL, it gives ResultSet
+st.executeUpdate() -> DML, it gives number/count of rows/cols affected.
+
+
+## The two stuff are same clearly observable. 
+Class.forName("com.mysql.jdbc.Driver")
+
+DriverManager.registerDriver(new com.mysql.jdbc.Driver())
