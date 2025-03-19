@@ -1,0 +1,4 @@
+What is Servlet? How it works?
+    A Servlet is a java file which take the request from the client on the internet it process that request and provide information to client in html format.
+
+Web container -> like tomcat, glassFish, webSphere 

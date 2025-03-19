@@ -8,6 +8,7 @@
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     id 'application'
+    id 'war'
 }
 
 repositories {
@@ -28,6 +29,10 @@ dependencies {
     implementation 'mysql:mysql-connector-java:8.0.33' 
     
     implementation 'org.postgresql:postgresql:42.7.1'
+
+
+    implementation 'javax.servlet:javax.servlet-api:4.0.1' // Servlet API
+    providedRuntime 'org.apache.tomcat.embed:tomcat-embed-core:9.0.78' // Embedded Tomcat
 }
 
 // Apply a specific Java toolchain to ease working on different environments.

@@ -139,3 +139,144 @@ st.executeUpdate() -> DML, it gives number/count of rows/cols affected.
 Class.forName("com.mysql.jdbc.Driver")
 
 DriverManager.registerDriver(new com.mysql.jdbc.Driver())
+
+#####More details on JDBC Connection---------------------------------------------------
+
+### **🔍 Connecting Java to Non-Relational (NoSQL) Databases**
+For relational databases like **PostgreSQL, MySQL, and Oracle**, we use **JDBC** (Java Database Connectivity) to establish a connection using SQL queries.  
+
+However, for **NoSQL databases** (like MongoDB, Redis, or Cassandra), the connection method **differs** because these databases do not use SQL and do not have a JDBC driver in the same way.
+
+---
+
+### **🔗 How to Connect Java to Different NoSQL Databases?**
+✅ **Each NoSQL database has its own Java client library or API** instead of using JDBC.  
+✅ **The connection and querying methods depend on the specific NoSQL database.**  
+
+## **1️⃣ Connecting Java to MongoDB**  
+MongoDB is a **document-based NoSQL database** that stores data in **JSON-like BSON format**.  
+
+### **📌 Steps to Connect Java to MongoDB**
+1. **Add MongoDB Driver to `build.gradle`**
+   ```gradle
+   dependencies {
+       implementation 'org.mongodb:mongodb-driver-sync:4.10.2'
+   }
+   ```
+   
+2. **Java Code to Connect and Fetch Data**
+   ```java
+   import com.mongodb.client.*;
+   import org.bson.Document;
+
+   public class MongoDBConnection {
+       public static void main(String[] args) {
+           // 🔹 Connect to MongoDB
+           MongoClient mongoClient = MongoClients.create("mongodb://localhost:27017");
+           MongoDatabase database = mongoClient.getDatabase("testdb");
+
+           // 🔹 Get Collection
+           MongoCollection<Document> collection = database.getCollection("students");
+
+           // 🔹 Query Data
+           Document student = collection.find().first();
+           if (student != null) {
+               System.out.println("Student: " + student.toJson());
+           }
+
+           mongoClient.close(); // Close connection
+       }
+   }
+   ```
+✅ **No SQL queries!** Instead, we use **MongoDB’s native API** (`find()`, `insertOne()`, etc.).  
+✅ **MongoDB doesn’t need JDBC.** It uses **MongoDB Driver**.
+
+---
+
+## **2️⃣ Connecting Java to Redis (Key-Value Store)**
+Redis is an **in-memory key-value database**. It is mainly used for **caching, real-time analytics, and message brokering**.
+
+### **📌 Steps to Connect Java to Redis**
+1. **Add Redis Client to `build.gradle`**
+   ```gradle
+   dependencies {
+       implementation 'redis.clients:jedis:5.1.0'
+   }
+   ```
+   
+2. **Java Code to Connect and Fetch Data**
+   ```java
+   import redis.clients.jedis.Jedis;
+
+   public class RedisConnection {
+       public static void main(String[] args) {
+           Jedis jedis = new Jedis("localhost", 6379);
+
+           // 🔹 Store Key-Value Pair
+           jedis.set("user:1001", "Rajeev");
+
+           // 🔹 Retrieve Value
+           String value = jedis.get("user:1001");
+           System.out.println("Stored value in Redis: " + value);
+
+           jedis.close(); // Close connection
+       }
+   }
+   ```
+✅ **Uses Jedis Client** (not JDBC).  
+✅ **Key-Value Storage instead of SQL queries.**  
+
+---
+
+## **3️⃣ Connecting Java to Cassandra (Column-Family Store)**
+Cassandra is a **highly scalable NoSQL database** that works with **column-family storage instead of rows & tables**.
+
+### **📌 Steps to Connect Java to Cassandra**
+1. **Add Cassandra Java Driver to `build.gradle`**
+   ```gradle
+   dependencies {
+       implementation 'com.datastax.oss:java-driver-core:4.15.0'
+   }
+   ```
+   
+2. **Java Code to Connect and Fetch Data**
+   ```java
+   import com.datastax.oss.driver.api.core.CqlSession;
+   import java.net.InetSocketAddress;
+
+   public class CassandraConnection {
+       public static void main(String[] args) {
+           // 🔹 Connect to Cassandra
+           CqlSession session = CqlSession.builder()
+                   .addContactPoint(new InetSocketAddress("127.0.0.1", 9042))
+                   .withLocalDatacenter("datacenter1")
+                   .build();
+
+           // 🔹 Query Data
+           session.execute("INSERT INTO students (id, name) VALUES (1, 'Rajeev')");
+           System.out.println("Data Inserted Successfully!");
+
+           session.close(); // Close connection
+       }
+   }
+   ```
+✅ **Uses Cassandra's CQL (Cassandra Query Language)** instead of traditional SQL.  
+✅ **No JDBC needed, uses Cassandra Java Driver.**  
+
+---
+
+## **📌 Key Differences Between Relational & NoSQL Database Connections in Java**
+| Feature | Relational (PostgreSQL, MySQL) | NoSQL (MongoDB, Redis, Cassandra) |
+|---------|-----------------------------|--------------------------------|
+| **Connection Method** | JDBC (`DriverManager.getConnection()`) | Specific Client Library (`MongoClients.create()`, `Jedis()`, etc.) |
+| **Query Language** | SQL (`SELECT * FROM students`) | Native API (`collection.find()`, `jedis.get()`, etc.) |
+| **Data Storage** | Tables & Rows | JSON, Key-Value, Column-Family |
+| **Scalability** | Vertical Scaling (More CPU, RAM) | Horizontal Scaling (Distributed Nodes) |
+
+---
+
+## **🚀 Conclusion**
+- **JDBC is only for relational databases (PostgreSQL, MySQL, etc.).**
+- **NoSQL databases use their own Java client libraries (MongoDB Driver, Jedis for Redis, etc.).**
+- **Each NoSQL database has a different connection and querying mechanism.**
+- **NoSQL databases do not use SQL queries; they have their own API methods.**
