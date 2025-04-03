@@ -44,6 +44,11 @@ war {
     archiveFileName = 'maven.war'
 }
 
+task runEmbeddedTomcat(type: JavaExec) {
+    main = 'servlet.ServletApp' 
+    classpath = sourceSets.main.runtimeClasspath
+}
+
 // Apply a specific Java toolchain to ease working on different environments.
 java {
     toolchain {
@@ -54,7 +59,7 @@ java {
 application {
     // Define the main class for the application.
     // mainClass = 'org.example.App'
-    mainClass = 'Servlet.HelloServlet'
+    mainClass = 'Servlet.ServletApp'
 }
 
 tasks.named('test') {
