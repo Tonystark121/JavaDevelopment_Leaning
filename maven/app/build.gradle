@@ -31,8 +31,16 @@ dependencies {
     implementation 'org.postgresql:postgresql:42.7.1'
 
 
-    implementation 'javax.servlet:javax.servlet-api:4.0.1' // Servlet API
-    providedRuntime 'org.apache.tomcat.embed:tomcat-embed-core:9.0.78' // Embedded Tomcat
+        // Servlet API
+    providedCompile 'javax.servlet:javax.servlet-api:4.0.1'
+
+    // Embedded Tomcat for running locally
+    implementation 'org.apache.tomcat.embed:tomcat-embed-core:9.0.78'
+    implementation 'org.apache.tomcat.embed:tomcat-embed-jasper:9.0.78'
+}
+
+war {
+    archiveFileName = 'myapp.war'
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
@@ -45,7 +53,7 @@ java {
 application {
     // Define the main class for the application.
     // mainClass = 'org.example.App'
-    mainClass = 'connection.FetchDetails'
+    mainClass = 'Servlet.EmbeddedServer'
 }
 
 tasks.named('test') {
