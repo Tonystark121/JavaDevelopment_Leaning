@@ -2,6 +2,7 @@ package Servlet;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 public class HelloServlet extends HttpServlet {
 
     @Override
-    protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
        // Corrected: Get "first" and "second" parameters from the request
        int firstValue = Integer.parseInt(request.getParameter("first"));
@@ -25,11 +26,18 @@ public class HelloServlet extends HttpServlet {
 
        System.out.println("Total of Input: " + totalSum);
 
-       // Setting the content type for the response
-       response.setContentType("text/html");
+    //    // Setting the content type for the response
+    //    response.setContentType("text/html");
 
-       // Writing the output to the response
-       response.getWriter().println("<h1>Hello, Servlet!</h1>");
-       response.getWriter().println("Sum of the values is: " + totalSum);
+    //    // Writing the output to the response
+    //    response.getWriter().println("<h1>Hello, Servlet!</h1>");
+    //    response.getWriter().println("Sum of the values is: " + totalSum);
+
+
+    // Let's try to call another servlet from here.
+
+        RequestDispatcher rd = request.getRequestDispatcher("square");
+
+        rd.forward(request, response);
     }
 }
