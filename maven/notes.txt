@@ -160,3 +160,14 @@ Three things are important:
     there are two method two call servlet from another servlet
 
     👁️👁️🧰  Req Dis and Redirect.
+
+
+    ### Another important stuff.
+
+    browser -> s1 -> s2 -> browser. this is how requestRedirect works. therefore the data sending in follow props drill method.
+
+
+    Whereas, in SendRedirect() method browser send request to s1 -> browser -> s2 (mentioning that it is being redirected to s2), Here the concept of sessionManagement is important as the data of s1 is stored in session and may be send to s2 in future.
+
+
+    Here we learn about redirect method and the use of methods.

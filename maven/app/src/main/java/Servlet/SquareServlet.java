@@ -7,14 +7,39 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @WebServlet()
 public class SquareServlet extends HttpServlet {
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException{
-        System.out.println("This is a square method");
+    @Override
+    protected void service(HttpServletRequest request, HttpServletResponse response) throws IOException{
+
+        // System.out.println("This is a square method");
+
+        // int totalSum = (int)(request.getAttribute("totalSum"));
+
+        // totalSum *= totalSum;
+
+        // PrintWriter out = response.getWriter();
+        // out.println("Let's get the square of the sum of inputted value.");
+
+        // out.println("The value of square of sum of values : " + totalSum);
+
+
+        // This is for redirect Method.
+
+        // instance of Session
+        HttpSession session = request.getSession();
+
+        int totalSum = (int)session.getAttribute("totalSum");
+
+        // int totalSum = Integer.parseInt(request.getParameter("totalSum"));
+
+        totalSum*=totalSum;
 
         PrintWriter out = response.getWriter();
-        out.println("Let's get the square of the sum of inputted value.");
+
+        out.println("Square of total sum is: " + totalSum);
     }
 }

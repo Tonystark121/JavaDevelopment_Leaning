@@ -8,12 +8,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @WebServlet("/hello")  
 public class HelloServlet extends HttpServlet {
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
        // Corrected: Get "first" and "second" parameters from the request
        int firstValue = Integer.parseInt(request.getParameter("first"));
@@ -36,8 +37,18 @@ public class HelloServlet extends HttpServlet {
 
     // Let's try to call another servlet from here.
 
-        RequestDispatcher rd = request.getRequestDispatcher("square");
+        // RequestDispatcher rd = request.getRequestDispatcher("square");
 
-        rd.forward(request, response);
+        // request.setAttribute("totalSum", totalSum);
+
+        // rd.forward(request, response);
+
+
+        // Let's try Redirect method.
+
+        HttpSession session = request.getSession();
+        session.setAttribute("totalSum", totalSum);
+
+        response.sendRedirect("square"); // this is URL rewriting method as we are manupulating the URL.
     }
 }
