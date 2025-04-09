@@ -171,3 +171,12 @@ Three things are important:
 
 
     Here we learn about redirect method and the use of methods.
+
+    ServletContext ServletConfig -> these two are use to get initial value of the servlets
+
+    the differnce b/w the two is ServletContext is shared among all servlets while ServletConfig using this we can specify which servlet should access this. 
+
+    to instantiate context: <context-param>
+    to instantiate config: <init-param>
+
+    Another important thing about the two is we don't need to create an object of above as this is handle by tomcat.

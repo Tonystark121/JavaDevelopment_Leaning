@@ -3,6 +3,11 @@
     <servlet>
         <servlet-name>HelloServlet</servlet-name>
         <servlet-class>Servlet.HelloServlet</servlet-class>
+
+        <init-param>
+            <param-name>salary</param-name>
+            <param-value>15000 dollors</param-value>
+        </init-param>
     </servlet>
     
     <servlet-mapping>
@@ -25,6 +30,16 @@
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>
     </welcome-file-list>
+
+    <context-param>
+        <param-name>name</param-name>
+        <param-value>Rajeev Kumar Gupta</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>occupation</param-name>
+        <param-value>Reseach and Software Engineer</param-value>
+    </context-param>
 
 
 </web-app>

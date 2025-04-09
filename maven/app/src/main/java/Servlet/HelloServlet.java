@@ -1,20 +1,22 @@
 package Servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
-import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 @WebServlet("/hello")  
 public class HelloServlet extends HttpServlet {
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
        // Corrected: Get "first" and "second" parameters from the request
        int firstValue = Integer.parseInt(request.getParameter("first"));
@@ -46,9 +48,43 @@ public class HelloServlet extends HttpServlet {
 
         // Let's try Redirect method.
 
-        HttpSession session = request.getSession();
-        session.setAttribute("totalSum", totalSum);
+        // HttpSession session = request.getSession();
+        // session.setAttribute("totalSum", totalSum);
 
-        response.sendRedirect("square"); // this is URL rewriting method as we are manupulating the URL.
+        // response.sendRedirect("square"); // this is URL rewriting method as we are manupulating the URL.
+
+
+        // This is redirect method using Cookie.
+
+        // should be passed as string.
+        Cookie cookie = new Cookie("totalSum", totalSum + "");
+
+        response.addCookie(cookie);
+
+
+        // using redirect method.
+        response.sendRedirect("square");
+
+
+        // Using servlet config and and servlet context.
+
+        // ServletContext ctx = getServletContext();
+        // String name =  ctx.getInitParameter("name");
+
+        // PrintWriter out = response.getWriter();
+        // out.println(name);
+
+
+        // using servletConfig.
+
+        ServletConfig con = getServletConfig();
+
+        String salary = con.getInitParameter("salary");
+
+        System.err.println("The salary is :" + salary);
+
+        PrintWriter out = response.getWriter();
+
+        out.println(salary);
     }
 }
