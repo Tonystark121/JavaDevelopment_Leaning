@@ -183,3 +183,39 @@ Three things are important:
 
 
     Let's learn JSP(java server pages)
+
+    Syntax to write JSP.
+
+    <%@ page import = "" this is termed as directive %> if any package is req.
+
+    <%! this is act as declation, above that servlet.  %>
+
+    <% scriptlet, this logic just goes directly to sevlet class and used  %> 
+
+    <%= k, this is also called as expression. %> this means out.println(k) 
+
+    Declation, Directive [@page, @include, @taglib], scriptlet, expression
+
+    <%page attribute="" attribute="" attribute="" %>
+
+    the attributes can be [
+
+      language = "scripting language"
+      extends="className"
+      import="package"
+      session="true|false"
+      autoFlush="true|false"
+      contentType="ctinfo"
+      errorPage="error_url"
+      isErrorPage="true|false"
+      info="information"
+      isELIgnored="true|false"
+      isThreadSafe="true|false"
+    ]
+
+    <%@ include file="filename" %>
+    <%@ include file="header.jsp" %>
+
+    @taglib -> <%@ taglib url="" prefix="fx" %>
+
+    <fx:rajeev>

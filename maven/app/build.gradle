@@ -34,6 +34,7 @@ dependencies {
 
         // Servlet API
     providedCompile 'javax.servlet:javax.servlet-api:4.0.1'
+    implementation 'org.apache.tomcat:tomcat-jsp-api:9.0.41'
 
     // Embedded Tomcat for running locally
     implementation 'org.apache.tomcat.embed:tomcat-embed-core:9.0.78'
