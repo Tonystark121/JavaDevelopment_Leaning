@@ -219,3 +219,14 @@ Three things are important:
     @taglib -> <%@ taglib url="" prefix="fx" %>
 
     <fx:rajeev>
+
+
+    BuiltIn Object (can be used in scriptlet and Expression)
+
+    [
+      Request, Response, PageContext(PageContext), out(JspWriter), Session, Application, config
+    ]
+
+
+    ##❌❌ To Handle Error ❌❌
+     we can create a new jsp file with the file mentioning isErrorPage as true and in the main page mention who is handling the error i.e errorPage = "error.jsp"

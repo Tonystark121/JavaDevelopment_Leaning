@@ -1,10 +1,7 @@
 package Servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -86,5 +83,8 @@ public class HelloServlet extends HttpServlet {
         // PrintWriter out = response.getWriter();
 
         // out.println(salary);
+
+
+        // Exception handling in Java.
     }
 }
