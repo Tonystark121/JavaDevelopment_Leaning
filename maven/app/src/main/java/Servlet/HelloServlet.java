@@ -77,14 +77,14 @@ public class HelloServlet extends HttpServlet {
 
         // using servletConfig.
 
-        ServletConfig con = getServletConfig();
+        // ServletConfig con = getServletConfig();
 
-        String salary = con.getInitParameter("salary");
+        // String salary = con.getInitParameter("salary");
 
-        System.err.println("The salary is :" + salary);
+        // System.err.println("The salary is :" + salary);
 
-        PrintWriter out = response.getWriter();
+        // PrintWriter out = response.getWriter();
 
-        out.println(salary);
+        // out.println(salary);
     }
 }

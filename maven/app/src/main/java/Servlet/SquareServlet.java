@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet()
+@WebServlet("/square")
 public class SquareServlet extends HttpServlet {
 
     @Override
@@ -65,13 +65,10 @@ public class SquareServlet extends HttpServlet {
 
         out.println("The square of sum of two numbers are: " + totalSum);
 
+        // ServletContext ctx = getServletContext();
+        // String name =  ctx.getInitParameter("name");
 
-        ServletContext ctx = getServletContext();
-        String name =  ctx.getInitParameter("name");
-
-        out.println(name);
-
-        response.sendRedirect("hello");
+        // out.println(name);
 
     }
 }
