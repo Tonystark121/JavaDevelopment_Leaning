@@ -1,5 +1,6 @@
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="java.util.*" errorPage="error.jsp" %>
 
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -9,7 +10,14 @@
   </head>
   <body bgcolor="blue" text="white">
     
-    <h1>Welcome to the Home Page!</h1>
+    <h1>Welcome to the Home Page! 
+
+      <!-- ${label.getName()} 
+      ${label.salary}
+      ${label.getCompany()} -->
+      ${label.toString()}
+
+    </h1>
     
     <jsp:include page="home.jsp" />
     <jsp:include page="connection.jsp" />

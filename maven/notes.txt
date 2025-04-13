@@ -245,3 +245,8 @@ The whole process as follow:
     -> model(data format send to jsp which is POJO) 
 
     -> view(jsp page using the data to show the page to client) 
+
+
+
+✅✅ JSTL -> JSP standard tag library
+  to use java objects getters and setter are must. see file student.

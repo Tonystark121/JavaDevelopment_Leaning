@@ -49,26 +49,29 @@ public class SquareServlet extends HttpServlet {
         
         // This is redirect method using Cookie.
 
-        int totalSum = 0;
+        // int totalSum = 0;
 
-        Cookie cookies[] = request.getCookies();
+        // Cookie cookies[] = request.getCookies();
 
-        for(Cookie c: cookies){
-            if(c.getName().equals("totalSum")){
-                totalSum = Integer.parseInt(c.getValue());
-            }
-        }
+        // for(Cookie c: cookies){
+        //     if(c.getName().equals("totalSum")){
+        //         totalSum = Integer.parseInt(c.getValue());
+        //     }
+        // }
 
-        totalSum *= totalSum;
+        // totalSum *= totalSum;
 
-        PrintWriter out = response.getWriter();
+        // PrintWriter out = response.getWriter();
 
-        out.println("The square of sum of two numbers are: " + totalSum);
+        // out.println("The square of sum of two numbers are: " + totalSum);
 
         // ServletContext ctx = getServletContext();
         // String name =  ctx.getInitParameter("name");
 
         // out.println(name);
 
+        PrintWriter out = response.getWriter();
+
+        out.println("I am in square but I don't know how.");
     }
 }

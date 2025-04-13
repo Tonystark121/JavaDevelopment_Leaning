@@ -2,9 +2,9 @@ package Servlet;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,6 +25,19 @@ public class HelloServlet extends HttpServlet {
        int totalSum = firstValue + secondValue;
 
        System.out.println("Total of Input: " + totalSum);
+
+
+       Sturent rajeev = new Sturent();
+       rajeev.setId(007);
+       rajeev.setCompany("Apple");
+       rajeev.setSalary(100000);
+       rajeev.setName("Rajeev Kumar Gupta");
+
+        request.setAttribute("label", rajeev);
+
+        RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
+
+        rd.forward(request, response);
 
     //    // Setting the content type for the response
     //    response.setContentType("text/html");
@@ -54,13 +67,13 @@ public class HelloServlet extends HttpServlet {
         // This is redirect method using Cookie.
 
         // should be passed as string.
-        Cookie cookie = new Cookie("totalSum", totalSum + "");
+        // Cookie cookie = new Cookie("totalSum", totalSum + "");
 
-        response.addCookie(cookie);
+        // response.addCookie(cookie);
 
 
-        // using redirect method.
-        response.sendRedirect("square");
+        // // using redirect method.
+        // response.sendRedirect("square");
 
 
         // Using servlet config and and servlet context.
