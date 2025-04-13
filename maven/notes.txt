@@ -230,3 +230,18 @@ Three things are important:
 
     ##❌❌ To Handle Error ❌❌
      we can create a new jsp file with the file mentioning isErrorPage as true and in the main page mention who is handling the error i.e errorPage = "error.jsp"
+
+
+Now the question arises, since it is easier to code in jsp do we skip using servlets. 
+
+The answer is no: Bcz all jsp code is converted to further used under servlets so this means servlets is faster. Another things is it convention that do not use business logic in jsp(meant only for view page.)
+
+The advantage of using jsp over html is it can be used to create dynamic page while latter not.
+
+
+The whole process as follow:
+    client[/myProfile] -> controller(servlets/business logic but to access data we must connect to DB, use seprate services & DAO to build the page.) 
+
+    -> model(data format send to jsp which is POJO) 
+
+    -> view(jsp page using the data to show the page to client) 

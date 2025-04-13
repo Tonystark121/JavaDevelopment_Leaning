@@ -12,6 +12,7 @@
     <h1>Welcome to the Home Page!</h1>
     
     <jsp:include page="home.jsp" />
+    <jsp:include page="connection.jsp" />
     
   </body>
 </html>
